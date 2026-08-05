@@ -1,11 +1,8 @@
-import { NextResponse } from 'next/server'; // 若使用 Next.js
-
-// 暫時強制設為 true 測試
-const isMaintenance = true;
+import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  // 設定維護模式開關 (正式環境可改用環境變數控制)
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+  // 測試：直接在這裡強制將維護模式設為 true
+  const isMaintenanceMode = true;
 
   const url = request.nextUrl.clone();
   const { pathname } = url;
@@ -20,7 +17,7 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  // 如果開啟維護模式，重新導向到維護頁，並回傳 503 狀態碼 (對 SEO 友善)
+  // 如果開啟維護模式，重新導向到維護頁，並回傳 503 狀態碼
   if (isMaintenanceMode) {
     url.pathname = '/maintenance.html';
     return NextResponse.rewrite(url, { status: 503 });
