@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'; // 若使用 Next.js
 
+// 暫時強制設為 true 測試
+const isMaintenance = true;
+
 export function middleware(request) {
   // 設定維護模式開關 (正式環境可改用環境變數控制)
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
